@@ -40,4 +40,4 @@ RUN cd SPADE/ && pip3 install -r requirements.txt
 
 RUN cd ..
 
-CMD ["python3", "run.py"]
+WORKDIR /app
