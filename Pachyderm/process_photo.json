@@ -1,0 +1,29 @@
+{
+  "pipeline": {
+    "name": "Process_Photo"
+  },
+  "description": "Bring old photos back to life",
+  "transform": {
+    "cmd": [
+      "python", "run.py", "--input_folder", "/pfs/input/images", "--output_folder", "/pfs/out", "--GPU", "0" 
+    ],
+    "image": "nickharvey/abuela:v0.1"
+  },
+  "standby": false,
+  "resource_limits": {
+    "gpu": {
+      "type": "nvidia.com/gpu",
+      "number": 1
+    }
+  },
+  "resource_requests": {
+    "memory": "4G",
+    "cpu": 1
+  },
+  "input": {
+        "pfs": {
+            "repo": "images",
+            "glob": "/*"
+        }
+    }
+}
