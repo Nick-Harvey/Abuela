@@ -1,3 +1,5 @@
 #GitIgnore
 __pycache__
-env
+venv
+gcloud_creds.json
+**/.DS_Store
