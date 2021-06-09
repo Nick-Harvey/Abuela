@@ -3,3 +3,4 @@ __pycache__
 venv
 gcloud_creds.json
 **/.DS_Store
+.env
