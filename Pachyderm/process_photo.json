@@ -5,9 +5,9 @@
   "description": "Bring old photos back to life",
   "transform": {
     "cmd": [
-      "python", "run.py", "--input_folder", "/pfs/input/images", "--output_folder", "/pfs/out", "--GPU", "0" 
+      "python", "Source/run.py", "--input_folder", "/pfs/input/images", "--output_folder", "/pfs/out", "--GPU", "0" 
     ],
-    "image": "nickharvey/abuela:v0.1"
+    "image": "nickharvey/abuela:v1"
   },
   "standby": false,
   "resource_limits": {
@@ -17,8 +17,8 @@
     }
   },
   "resource_requests": {
-    "memory": "4G",
-    "cpu": 1
+    "memory": "10G",
+    "cpu": 4
   },
   "input": {
         "pfs": {
