@@ -15,21 +15,44 @@ client = storage.Client()
 # https://console.cloud.google.com/storage/browser/[bucket-id]/
 bucket = client.get_bucket('dev-abuela-input-images')
 
+# Start of Streamlit App
+# Convert this to an actual Main function later
 st.title("Abuela")
-st.text("These are my grandparents Emma and Raul. In the early 60's they immigrated from Cuba to the US to escape Castro begin a new life.")
+st.markdown(
+    "These are my grandparents Emma and Raul. In the early 60's they immigrated from Cuba to the US to escape Castro and his army."
+    )
 
-
-#@st.cache
-uploaded_file = st.file_uploader("Upload a photo")
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, caption='Uploaded Image.', use_column_width=True)
-    objectstore.upload_blob(bucket.name, uploaded_file, uploaded_file.name)
-    st.write("Processing...")
-    #label = predict(uploaded_file)
-    #st.write('%s (%.2f%%)' % (label[1], label[2]*100))
+# Add the Static Hero Image
+hero_image = Image.open('imgs/static/Emma_and_Raul.jpg')
+st.image(hero_image)
 
 
 def process_image(image_path):
 
-	pass
+    pass
+
+
+with st.sidebar.form("Restore"):
+    st.write("Start Here")
+    ## Upload file 
+    uploaded_file = st.file_uploader("Upload a Photo you want to restore.")
+
+    if uploaded_file is not None:
+        objectstore.upload_blob(bucket.name, uploaded_file, uploaded_file.name)
+
+    enhance_options = st.multiselect(
+        "Photo Enhancement Options",
+        ["General restore", "Restore damaged photo (ie cracks)", "Colorize"]
+    )
+
+    # Submit the form
+    submitted = st.form_submit_button("Submit")
+
+    if 'General restore' in enhance_options:
+        if submitted:
+            process_image(uploaded_file)
+    else:
+        pass
+
+
+
