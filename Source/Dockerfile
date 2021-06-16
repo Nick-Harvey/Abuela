@@ -3,6 +3,8 @@ FROM nvidia/cuda:11.1-base-ubuntu20.04
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt install git bzip2 wget unzip python3-pip python3-dev cmake libgl1-mesa-dev python-is-python3 libgtk2.0-dev -yq
 ADD . /app
 WORKDIR /app
+RUN mkdir ./Global
+
 RUN cd Face_Enhancement/models/networks/ &&\
   git clone https://github.com/vacancy/Synchronized-BatchNorm-PyTorch &&\
   cp -rf Synchronized-BatchNorm-PyTorch/sync_batchnorm . &&\
@@ -39,5 +41,3 @@ RUN git clone https://github.com/NVlabs/SPADE.git
 RUN cd SPADE/ && pip3 install -r requirements.txt
 
 RUN cd ..
-
-WORKDIR /app/Source
