@@ -1,13 +1,13 @@
 {
   "pipeline": {
-    "name": "Process_Photo"
+    "name": "Nvidia-test"
   },
-  "description": "Bring old photos back to life",
+  "description": "test nvitdia",
   "transform": {
     "cmd": [
-      "python", "Source/run.py", "--input_folder", "/pfs/input/images", "--output_folder", "/pfs/out/", "--GPU", "0" 
+      "nvidia-smi", ">", "/pfs/out/output.txt" 
     ],
-    "image": "nickharvey/abuela:v1"
+    "image": "nvidia/cuda:11.0-base"
   },
   "standby": false,
   "resource_limits": {
@@ -17,7 +17,7 @@
     }
   },
   "resource_requests": {
-    "memory": "10G",
+    "memory": "1G",
     "cpu": 4
   },
   "input": {
