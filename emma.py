@@ -28,6 +28,7 @@ st.image(hero_image)
 
 
 def process_image(image_path):
+    
 
     pass
 
