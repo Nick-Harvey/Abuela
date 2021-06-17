@@ -1,4 +1,5 @@
 #GitIgnore
+.gitignore
 __pycache__
 venv
 gcloud_creds.json

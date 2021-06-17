@@ -28,9 +28,7 @@ RUN cd Source/Face_Enhancement/ &&\
   rm -f checkpoints.zip &&\
   cd ../
 
-RUN pip3 install numpy
-
-RUN pip3 install dlib
+RUN pip3 install numpy dlib
 
 RUN pip3 install -r requirements.txt
 
@@ -40,8 +38,4 @@ RUN cd SPADE/ && pip3 install -r requirements.txt
 
 RUN cd ..
 
-COPY Source Source
-
 FROM builder AS build_s1
-
-ADD Global Global
