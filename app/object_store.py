@@ -8,9 +8,10 @@ class objectStore():
 
 	def upload_blob(bucket_name, uploaded_file, destination_blob_name):
 		"""Uploads a file to the GCS bucket."""
+		#TODO Add something to check if the file has already be added in the last 60 seconds
 
 		client = storage.Client()
-		bucket = client.get_bucket('dev-abuela-input-images')
+		bucket = client.get_bucket('abuela_input_images_dev')
 		blob = bucket.blob(destination_blob_name)
 
 		blob.upload_from_file(uploaded_file, rewind=True)

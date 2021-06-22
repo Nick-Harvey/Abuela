@@ -9,51 +9,48 @@ from PIL import Image
 
 # App libraries
 from app.object_store import objectStore as objectstore
+# Jaruco is the hometown my grandmother is from in Cuba.
+# She is the insipiration for this project. She'll my 
+# OG IT Abuela (She managed datacenters in the 70's)
+from app.pipelines import Jaruco as Jaruco
 
-# Gcloud bucket 
-client = storage.Client()
-# https://console.cloud.google.com/storage/browser/[bucket-id]/
-bucket = client.get_bucket('dev-abuela-input-images')
 
 # Start of Streamlit App
 # Convert this to an actual Main function later
-st.title("Abuela")
+st.title("Hi, Abuela!")
 st.markdown(
-    "These are my grandparents Emma and Raul. In the early 60's they immigrated from Cuba to the US to escape Castro and his army."
+    "Step1. Pick a Photo you would like to restore."
     )
 
-# Add the Static Hero Image
-hero_image = Image.open('imgs/static/Emma_and_Raul.jpg')
-st.image(hero_image)
+uploaded_file = st.file_uploader("Upload a Photo you want to restore.")
 
 
-def process_image(image_path):
+## Process the Photo
+if uploaded_file is not None:
+    #Display the photo that will get enhanced
+    image = Image.open(uploaded_file)
     
+    # Upload it to gcloud
 
-    pass
-
-
-with st.sidebar.form("Restore"):
-    st.write("Start Here")
-    ## Upload file 
-    uploaded_file = st.file_uploader("Upload a Photo you want to restore.")
-
-    if uploaded_file is not None:
-        objectstore.upload_blob(bucket.name, uploaded_file, uploaded_file.name)
-
-    enhance_options = st.multiselect(
-        "Photo Enhancement Options",
-        ["General restore", "Restore damaged photo (ie cracks)", "Colorize"]
-    )
-
-    # Submit the form
-    submitted = st.form_submit_button("Submit")
-
-    if 'General restore' in enhance_options:
-        if submitted:
-            process_image(uploaded_file)
-    else:
-        pass
+    objectstore.upload_blob(uploaded_file)
 
 
+    st.write("This is the image that will get upgraded.")
+    st.image(image)
 
+    st.markdown(
+        "Step2. Choose what you want done."
+        )
+
+    with st.form("Choose Restore Option"):
+        st.write("Choose the type of restore")
+        general_restore = st.checkbox("General Restore", value= False)
+        general_restore_with_cracks = st.checkbox("General Restore With Cracks", value=False)
+        
+        if general_restore:
+            Jaruco.general_restore(uploaded_file)
+
+        if general_restore_with_cracks:
+            Jaruco.general_restore_with_cracks(uploaded_file)
+
+        submitted = st.form_submit_button("Restore")

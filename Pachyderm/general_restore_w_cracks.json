@@ -1,0 +1,29 @@
+{
+  "pipeline": {
+    "name": "general_restore_w_cracks"
+  },
+  "description": "Bring old photos back to life",
+  "transform": {
+    "cmd": [
+      "python", "run.py", "--input_folder", "/pfs/input/general_restore_w_cracks_input", "--output_folder", "/pfs/out/", "--GPU", "0", "--with_scratch"
+    ],
+    "image": "nickharvey/abuela:v3"
+  },
+  "standby": false,
+  "resource_limits": {
+    "gpu": {
+      "type": "nvidia.com/gpu",
+      "number": 1
+    }
+  },
+  "resource_requests": {
+    "memory": "4G",
+    "cpu": 1
+  },
+  "input": {
+        "pfs": {
+            "repo": "general_restore_w_cracks_input",
+            "glob": "/*"
+        }
+    }
+}
