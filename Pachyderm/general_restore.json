@@ -1,6 +1,6 @@
 {
   "pipeline": {
-    "name": "Process_Photo"
+    "name": "general_restore"
   },
   "description": "Bring old photos back to life",
   "transform": {
@@ -9,7 +9,7 @@
     ],
     "image": "nickharvey/abuela:v3"
   },
-  "standby": false,
+  "standby": true,
   "resource_limits": {
     "gpu": {
       "type": "nvidia.com/gpu",
@@ -17,7 +17,7 @@
     }
   },
   "resource_requests": {
-    "memory": "4G",
+    "memory": "1G",
     "cpu": 1
   },
   "input": {
