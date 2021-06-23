@@ -9,16 +9,13 @@
     ],
     "image": "nickharvey/abuela:v3"
   },
-  "standby": true,
+  "standby": false,
   "resource_limits": {
+    "memory": "1024M",
     "gpu": {
       "type": "nvidia.com/gpu",
       "number": 1
     }
-  },
-  "resource_requests": {
-    "memory": "1G",
-    "cpu": 1
   },
   "input": {
         "pfs": {
