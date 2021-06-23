@@ -5,16 +5,16 @@
   "description": "Bring old photos back to life",
   "transform": {
     "cmd": [
-      "python", "run.py", "--input_folder", "/pfs/input/general_restore_input", "--output_folder", "/pfs/out/", "--GPU", "0" 
+      "python", "run.py", "--input_folder", "/pfs/general_restore_input/", "--output_folder", "/pfs/out/", "--GPU", "0" 
     ],
     "image": "nickharvey/abuela:v3"
   },
   "standby": false,
   "resource_limits": {
-    "memory": "1024M",
+    "memory": "4G",
     "gpu": {
       "type": "nvidia.com/gpu",
-      "number": 1
+      "number": 2
     }
   },
   "input": {
