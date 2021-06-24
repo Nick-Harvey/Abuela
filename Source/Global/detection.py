@@ -16,6 +16,7 @@ from PIL import Image, ImageFile
 
 from detection_models import networks
 from detection_util.util import *
+torch.cuda.empty_cache()
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
