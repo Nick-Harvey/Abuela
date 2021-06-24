@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import time
 import plotly.express as px
 from matplotlib import pyplot as plt
 from google.cloud import storage
@@ -43,12 +44,12 @@ if uploaded_file is not None:
     st.write("This is the image that will get upgraded.")
     st.image(image)
 
-    st.markdown(
-        "Step2. Choose what you want done."
-        )
+    '''
+    ## Step 2.
+    Choose what type of restore you want to apply
+    '''
 
     with st.form("Choose Restore Option"):
-        st.write("Choose the type of restore")
         general_restore = st.checkbox("General Restore", value= False)
         general_restore_with_cracks = st.checkbox("General Restore With Cracks", value=False)
         
@@ -61,3 +62,9 @@ if uploaded_file is not None:
             Jaruco.general_restore_with_cracks(uploaded_file)
 
         submitted = st.form_submit_button("Restore")
+        if submitted:
+            with st.spinner('Restoring...'):
+                time.sleep(5)
+                st.success('Done!')
+
+    st.write("Outside the form")

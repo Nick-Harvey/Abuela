@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     if not opts.with_scratch:
         stage_1_command = (
-            "python test.py --test_mode Crop --Quality_restore --test_input "
+            "python test.py --test_mode Scale --Quality_restore --test_input "
             + stage_1_input_dir
             + " --outputs_dir "
             + stage_1_output_dir
@@ -92,7 +92,6 @@ if __name__ == "__main__":
     stage_4_output_dir = os.path.join(opts.output_folder, "final_output")
     if not os.path.exists(stage_4_output_dir):
         os.makedirs(stage_4_output_dir)
-    
     for x in os.listdir(stage_1_results):
         img_dir = os.path.join(stage_1_results, x)
         shutil.copy(img_dir, stage_4_output_dir)
