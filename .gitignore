@@ -5,3 +5,4 @@ venv
 gcloud_creds.json
 **/.DS_Store
 .env
+model_files

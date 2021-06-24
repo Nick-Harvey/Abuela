@@ -7,32 +7,37 @@ from google.cloud import storage
 import os
 from PIL import Image
 
+bucket = "abuela_input_images_dev"
+
 # App libraries
 from app.object_store import objectStore as objectstore
 # Jaruco is the hometown my grandmother is from in Cuba.
-# She is the insipiration for this project. She'll my 
-# OG IT Abuela (She managed datacenters in the 70's)
+# She is the insipiration for this project.
 from app.pipelines import Jaruco as Jaruco
 
 
 # Start of Streamlit App
 # Convert this to an actual Main function later
 st.title("Hi, Abuela!")
-st.markdown(
-    "Step1. Pick a Photo you would like to restore."
-    )
+# st.markdown(
+#     "##Step 1."
+#     )
+# st.markdown(
+#     "Pick a photo you want to restore."
+#     )
 
-uploaded_file = st.file_uploader("Upload a Photo you want to restore.")
+'''
+## Step 1.
+Pick a photo you want to restore
+'''
+
+uploaded_file = st.file_uploader("Max image size 650x650 (temp issue due to gpu limits)")
 
 
 ## Process the Photo
 if uploaded_file is not None:
     #Display the photo that will get enhanced
     image = Image.open(uploaded_file)
-    
-    # Upload it to gcloud
-
-    objectstore.upload_blob(uploaded_file)
 
 
     st.write("This is the image that will get upgraded.")
@@ -48,7 +53,9 @@ if uploaded_file is not None:
         general_restore_with_cracks = st.checkbox("General Restore With Cracks", value=False)
         
         if general_restore:
+            objectstore.upload_blob(bucket, uploaded_file, uploaded_file.name)
             Jaruco.general_restore(uploaded_file)
+            # Upload it to gcloud
 
         if general_restore_with_cracks:
             Jaruco.general_restore_with_cracks(uploaded_file)

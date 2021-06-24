@@ -153,6 +153,7 @@ if __name__ == "__main__":
             input = img_transform(input)
             input = input.unsqueeze(0)
             mask = torch.zeros_like(input)
+            torch.cuda.empty_cache()
         ### Necessary input
 
         try:
