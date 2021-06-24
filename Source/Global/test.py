@@ -22,11 +22,11 @@ def data_transforms(img, method=Image.BILINEAR, scale=False):
     pw, ph = ow, oh
     if scale == True:
         if ow < oh:
-            ow = 256
-            oh = ph / pw * 256
+            ow = 128
+            oh = ph / pw * 128
         else:
-            oh = 256
-            ow = pw / ph * 256
+            oh = 128
+            ow = pw / ph * 128
 
     h = int(round(oh / 4) * 4)
     w = int(round(ow / 4) * 4)
@@ -40,9 +40,9 @@ def data_transforms(img, method=Image.BILINEAR, scale=False):
 def data_transforms_rgb_old(img):
     w, h = img.size
     A = img
-    if w < 256 or h < 256:
-        A = transforms.Scale(256, Image.BILINEAR)(img)
-    return transforms.CenterCrop(256)(A)
+    if w < 128 or h < 128:
+        A = transforms.Scale(128, Image.BILINEAR)(img)
+    return transforms.CenterCrop(128)(A)
 
 
 def irregular_hole_synthesize(img, mask):

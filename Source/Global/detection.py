@@ -36,11 +36,11 @@ def data_transforms(img, full_size, method=Image.BICUBIC):
         ow, oh = img.size
         pw, ph = ow, oh
         if ow < oh:
-            ow = 256
-            oh = ph / pw * 256
+            ow = 128
+            oh = ph / pw * 128
         else:
-            oh = 256
-            ow = pw / ph * 256
+            oh = 128
+            ow = pw / ph * 128
 
         h = int(round(oh / 16) * 16)
         w = int(round(ow / 16) * 16)
