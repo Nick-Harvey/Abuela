@@ -22,11 +22,11 @@ def data_transforms(img, method=Image.BILINEAR, scale=False):
     pw, ph = ow, oh
     if scale == True:
         if ow < oh:
-            ow = 128
-            oh = ph / pw * 128
+            ow = 256
+            oh = ph / pw * 256
         else:
-            oh = 128
-            ow = pw / ph * 128
+            oh = 256
+            ow = pw / ph * 256
 
     h = int(round(oh / 4) * 4)
     w = int(round(ow / 4) * 4)
@@ -40,9 +40,9 @@ def data_transforms(img, method=Image.BILINEAR, scale=False):
 def data_transforms_rgb_old(img):
     w, h = img.size
     A = img
-    if w < 128 or h < 128:
-        A = transforms.Scale(128, Image.BILINEAR)(img)
-    return transforms.CenterCrop(128)(A)
+    if w < 256 or h < 256:
+        A = transforms.Scale(256, Image.BILINEAR)(img)
+    return transforms.CenterCrop(256)(A)
 
 
 def irregular_hole_synthesize(img, mask):
@@ -158,6 +158,8 @@ if __name__ == "__main__":
 
         try:
             generated = model.inference(input, mask)
+            print("clearing CUDA Cache")
+            torch.cuda.empty_cache()
         except Exception as ex:
             print("Skip %s due to an error:\n%s" % (input_name, str(ex)))
             continue
