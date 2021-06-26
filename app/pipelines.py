@@ -1,7 +1,7 @@
 import os
 import logging
 import python_pachyderm
-from python_pachyderm import ModifyFileClient as mfc
+from python_pachyderm import ModifyFileClient
 
 # Connects to a pachyderm cluster on localhost:30650.
 # For other options, see the API docs.
@@ -14,7 +14,7 @@ class Jaruco():
 		filename = '/{}'.format(uploaded_file.name)
 		img_bytes = uploaded_file.getvalue()
 		with client.commit("general_restore_input", "master") as commit:
-		    mfc.put_file_from_fileobj(commit, filename, uploaded_file)
+		    python_pachyderm.put_file_from_fileobj(commit, filename, uploaded_file)
 		pass
 
 
@@ -23,5 +23,5 @@ class Jaruco():
 		filename = '/{}'.format(uploaded_file.name)
 		img_bytes = uploaded_file.getvalue()
 		with client.commit("general_restore_w_cracks_input", "master") as commit:
-		    mfc.put_file_from_fileobj(commit, filename, uploaded_file)
+		    python_pachyderm.put_file_from_fileobj(commit, filename, uploaded_file)
 		pass
