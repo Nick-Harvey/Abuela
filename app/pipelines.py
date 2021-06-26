@@ -1,7 +1,6 @@
 import os
 import logging
 import python_pachyderm
-from python_pachyderm import ModifyFileClient
 
 # Connects to a pachyderm cluster on localhost:30650.
 # For other options, see the API docs.
