@@ -4,17 +4,17 @@ import python_pachyderm
 
 # Connects to a pachyderm cluster on localhost:30650.
 # For other options, see the API docs.
-pach_client = python_pachyderm.Client()
+client = python_pachyderm.Client()
 
 
-class Jaruco():
+class Jaruco:
 
 	def general_restore(uploaded_file):
 		"""Do a general restore on a photo that doesn't have cracks"""
 		filename = '/{}'.format(uploaded_file.name)
 		img_bytes = uploaded_file.getvalue()
-		with pach_client.commit("general_restore_input", "master") as commit:
-		    pach_client.put_files(uploaded_file, commit, filename)
+		with client.commit("general_restore_input", "master") as commit:
+		    client.put_file_bytes(commit, filename, b"img_bytes")
 		pass
 
 
@@ -22,6 +22,6 @@ class Jaruco():
 		"""Do a general restore on a photo that does have cracks"""
 		filename = '/{}'.format(uploaded_file.name)
 		img_bytes = uploaded_file.getvalue()
-		with pach_client.commit("general_restore_w_cracks_input", "master") as commit:
-		    pach_client.put_files(uploaded_file, commit, filename)
+		with client.commit("general_restore_w_cracks_input", "master") as commit:
+		    client.put_file_bytes(commit, filename, b"img_bytes")
 		pass
