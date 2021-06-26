@@ -14,7 +14,7 @@ class Jaruco:
 		filename = '/{}'.format(uploaded_file.name)
 		img_bytes = uploaded_file.getvalue()
 		with client.commit("general_restore_input", "master") as commit:
-		    client.put_file_bytes(commit, filename, b"img_bytes")
+		    client.put_file_bytes(commit, filename, img_bytes)
 		pass
 
 
@@ -23,5 +23,5 @@ class Jaruco:
 		filename = '/{}'.format(uploaded_file.name)
 		img_bytes = uploaded_file.getvalue()
 		with client.commit("general_restore_w_cracks_input", "master") as commit:
-		    client.put_file_bytes(commit, filename, b"img_bytes")
+		    client.put_file_bytes(commit, filename, img_bytes)
 		pass
