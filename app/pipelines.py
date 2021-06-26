@@ -36,3 +36,4 @@ class Jaruco():
 		# with tempfile.NamedTemporaryFile(suffix="montage.png", delete=False) as dest_file:
 		#     shutil.copyfileobj(source_file, dest_file)
 		#     print("montage written to {}".format(dest_file.name))
+		pass
