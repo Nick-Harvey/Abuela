@@ -12,7 +12,7 @@ class Jaruco():
 		"""Do a general restore on a photo that doesn't have cracks"""
 		
 		with client.commit("general_restore_input", "master") as commit:
-		    client.put_file_bytes(commit, "/", b"image")
+		    client.put_file_bytes(commit, "/", image)
 		pass
 
 
@@ -20,5 +20,5 @@ class Jaruco():
 		"""Do a general restore on a photo that does have cracks"""
 		
 		with client.commit("general_restore_w_cracks_input", "master") as commit:
-		    client.put_file_bytes(commit, "/", b"image")
+		    client.put_file_bytes(commit, "/", image)
 		pass
