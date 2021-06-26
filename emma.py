@@ -8,7 +8,8 @@ from google.cloud import storage
 import os
 from PIL import Image
 
-bucket = "abuela_input_images_dev"
+gen_restore_bucket = "abuela_input_images_dev"
+scratches_bucket = "abuela_input_images_scratches_dev"
 
 # App libraries
 from app.object_store import objectStore as objectstore
@@ -27,12 +28,16 @@ st.title("Hi, Abuela!")
 #     "Pick a photo you want to restore."
 #     )
 
-'''
-## Step 1.
-Pick a photo you want to restore
-'''
 
-uploaded_file = st.file_uploader("Max image size 650x650 (temp issue due to gpu limits)")
+st.sidebar.write(
+    '''
+    ## Step 1.
+    Pick a photo you want to restore
+    '''
+    )
+
+
+uploaded_file = st.sidebar.file_uploader("Max image size 650x650 (temp issue due to gpu limits)")
 
 
 ## Process the Photo
@@ -50,21 +55,31 @@ if uploaded_file is not None:
     '''
 
     with st.form("Choose Restore Option"):
-        general_restore = st.checkbox("General Restore", value= False)
-        general_restore_with_cracks = st.checkbox("General Restore With Cracks", value=False)
+        restore_type = st.radio("Pick one", ['General Restore', 'General Restore With Cracks'])
+        submitted = st.form_submit_button("Restore")
         
-        if general_restore:
-            objectstore.upload_blob(bucket, uploaded_file, uploaded_file.name)
+        if restore_type == 'General Restore' :
+            objectstore.upload_blob(gen_restore_bucket, uploaded_file, uploaded_file.name)
             Jaruco.general_restore(uploaded_file)
             # Upload it to gcloud
-
-        if general_restore_with_cracks:
+        elif restore_type == 'General Restore With Cracks':
+            objectstore.upload_blob(scratches_bucket, uploaded_file, uploaded_file.name)
             Jaruco.general_restore_with_cracks(uploaded_file)
+        else:
+            pass 
 
-        submitted = st.form_submit_button("Restore")
         if submitted:
             with st.spinner('Restoring...'):
                 time.sleep(5)
                 st.success('Done!')
 
-    st.write("Outside the form")
+            
+# # Wait for the commit (and its downstream commits) to finish
+# for _ in client.wait_commit(commit.id):
+#     pass
+
+# # Get the montage
+# source_file = client.get_file(("montage", "master"), "/montage.png")
+# with tempfile.NamedTemporaryFile(suffix="montage.png", delete=False) as dest_file:
+#     shutil.copyfileobj(source_file, dest_file)
+#     print("montage written to {}".format(dest_file.name))

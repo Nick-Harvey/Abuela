@@ -1,4 +1,8 @@
 # Abuela
+This photo restoration app enables anyone to upload a old photo and have it automatically restored using AI. 
+
+
+## Who's this for
 In the early 60's my grandparents immigrated from Cuba to the US in order to escape Castro. With nothing but the clothes on their backs, two kids (and one on the way) they left the shores of miami and moved to DC to start Over. My Abuela (spanish for grandmother) Emma, is [OG](https://www.dictionary.com/e/slang/og/) I.T in that she was running data centers back in the 70's and she's always been a huge insipration to me. This little photo restoration app is for her to use and enjoy
 
 ![My grandparents](imgs/static/Emma_Raul_Honeymoon.jpg)
