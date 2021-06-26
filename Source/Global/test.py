@@ -158,8 +158,6 @@ if __name__ == "__main__":
 
         try:
             generated = model.inference(input, mask)
-            print("clearing CUDA Cache")
-            torch.cuda.empty_cache()
         except Exception as ex:
             print("Skip %s due to an error:\n%s" % (input_name, str(ex)))
             continue
