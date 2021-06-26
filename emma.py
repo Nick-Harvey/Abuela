@@ -56,24 +56,24 @@ if uploaded_file is not None:
 
     with st.form("Choose Restore Option"):
         restore_type = st.radio("Pick one", ['General Restore', 'General Restore With Cracks'])
-        submitted = st.form_submit_button("Restore")
-        
-        if restore_type == 'General Restore' :
-            objectstore.upload_blob(gen_restore_bucket, uploaded_file, uploaded_file.name)
-            Jaruco.general_restore(uploaded_file)
-            # Upload it to gcloud
-        elif restore_type == 'General Restore With Cracks':
-            objectstore.upload_blob(scratches_bucket, uploaded_file, uploaded_file.name)
-            Jaruco.general_restore_with_cracks(uploaded_file)
-        else:
-            pass 
+        submitted = st.form_submit_button("Restore") 
 
         if submitted:
+            if restore_type == 'General Restore' :
+                objectstore.upload_blob(gen_restore_bucket, uploaded_file, uploaded_file.name)
+                Jaruco.general_restore(uploaded_file)
+                # Upload it to gcloud
+            elif restore_type == 'General Restore With Cracks':
+                objectstore.upload_blob(scratches_bucket, uploaded_file, uploaded_file.name)
+                Jaruco.general_restore_with_cracks(uploaded_file)
+            else:
+                pass
+            
             with st.spinner('Restoring...'):
                 time.sleep(5)
                 st.success('Done!')
 
-            
+
 # # Wait for the commit (and its downstream commits) to finish
 # for _ in client.wait_commit(commit.id):
 #     pass
