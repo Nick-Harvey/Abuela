@@ -49,6 +49,10 @@ if uploaded_file is not None:
     st.write("This is the image that will get upgraded.")
     st.image(image)
 
+    img_bytes = uploaded_file.getvalue()
+    st.image(img_bytes)
+
+
     '''
     ## Step 2.
     Choose what type of restore you want to apply
