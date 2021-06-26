@@ -21,7 +21,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output_folder",
         type=str,
-        default="./",
+        default="./output",
         help="Restored images, please use the absolute path",
     )
     parser.add_argument("--GPU", type=str, default="6,7", help="0,1,2")
@@ -160,4 +160,3 @@ if __name__ == "__main__":
     print("\n")
 
     print("All the processing is done. Please check the results.")
-
