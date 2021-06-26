@@ -16,7 +16,6 @@ from PIL import Image, ImageFile
 
 from detection_models import networks
 from detection_util.util import *
-torch.cuda.empty_cache()
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -36,11 +35,11 @@ def data_transforms(img, full_size, method=Image.BICUBIC):
         ow, oh = img.size
         pw, ph = ow, oh
         if ow < oh:
-            ow = 128
-            oh = ph / pw * 128
+            ow = 256
+            oh = ph / pw * 256
         else:
-            oh = 128
-            ow = pw / ph * 128
+            oh = 256
+            ow = pw / ph * 256
 
         h = int(round(oh / 16) * 16)
         w = int(round(ow / 16) * 16)
@@ -104,7 +103,7 @@ def main(config):
     print("directory of testing image: " + config.test_path)
     imagelist = os.listdir(config.test_path)
     imagelist.sort()
-    total_iter = 0
+    total_iter = 0 
 
     P_matrix = {}
     save_url = os.path.join(config.output_dir)
@@ -148,7 +147,7 @@ def main(config):
         with torch.no_grad():
             P = torch.sigmoid(model(scratch_image_scale))
 
-        P = P.data.cpu()
+        P = P.data.cpu( )
         P = F.interpolate(P, [ow, oh], mode="nearest")
 
         tv.utils.save_image(
