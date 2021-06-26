@@ -10,7 +10,7 @@ class Jaruco():
 
 	def general_restore(uploaded_file):
 		"""Do a general restore on a photo that doesn't have cracks"""
-		filename = "/{}".format(uploaded_file.name())
+		filename = '/{}'.format(uploaded_file.name)
 		img_bytes = uploaded_file.get_value()
 		with client.commit("general_restore_input", "master") as commit:
 		    client.put_file_from_bytes(commit, filename, b"img_bytes")
@@ -19,7 +19,7 @@ class Jaruco():
 
 	def general_restore_wcracks(uploaded_file):
 		"""Do a general restore on a photo that does have cracks"""
-		filename = "/{}".format(uploaded_file.name())
+		filename = '/{}'.format(uploaded_file.name)
 		img_bytes = uploaded_file.get_value()
 		with client.commit("general_restore_w_cracks_input", "master") as commit:
 		    client.put_file_from_bytes(commit, filename, b"img_bytes")
