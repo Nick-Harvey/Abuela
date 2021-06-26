@@ -11,6 +11,7 @@ class Jaruco():
 	def general_restore(image):
 		"""Do a general restore on a photo that doesn't have cracks"""
 		bytes_data = image.getvalue()
+		print(bytes_data)
 		with client.commit("general_restore_input", "master") as commit:
 		    client.put_file_bytes(commit, "/", bytes_data)
 		pass
