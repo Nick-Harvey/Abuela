@@ -1,15 +1,6 @@
 FROM nvidia/cuda:11.1-base-ubuntu20.04
 
-RUN apt update && DEBIAN_FRONTEND=noninteractive apt install git bzip2 \
-  wget \
-  unzip \
-  python3-pip \
-  python3-dev \
-  cmake \
-  libgl1-mesa-dev \
-  python-is-python3 \
-  libgtk2.0-dev -yq
-
+RUN apt update && DEBIAN_FRONTEND=noninteractive apt install git bzip2 wget unzip python3-pip python3-dev cmake libgl1-mesa-dev python-is-python3 libgtk2.0-dev -yq
 ADD . /app
 WORKDIR /app
 RUN cd Face_Enhancement/models/networks/ &&\
@@ -37,7 +28,9 @@ RUN cd Face_Enhancement/ &&\
   rm -f checkpoints.zip &&\
   cd ../
 
-RUN pip3 install numpy dlib
+RUN pip3 install numpy
+
+RUN pip3 install dlib
 
 RUN pip3 install -r requirements.txt
 
