@@ -1,5 +1,5 @@
 #FROM nvidia/cuda:11.1-base-ubuntu20.04 AS builder
-FROM nvidia/cuda:11.3.1-base-ubuntu20.04
+FROM nvidia/cuda:11.2.2-base-ubuntu20.04
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt install git bzip2 \
   wget \
