@@ -5,16 +5,16 @@
   "description": "Bring old photos back to life",
   "transform": {
     "cmd": [
-      "python", "run.py", "--input_folder", "/pfs/general_restore_input/", "--output_folder", "/pfs/out/", "--GPU", "0" 
+      "python", "run.py", "--input_folder", "/pfs/general_restore_input/", "--output_folder", "/pfs/out", "--GPU", "1" 
     ],
-    "image": "nickharvey/abuela-backend:v1"
+    "image": "nickharvey/abuela-backend:dev-v1"
   },
   "standby": false,
   "resource_limits": {
     "memory": "4G",
     "gpu": {
       "type": "nvidia.com/gpu",
-      "number": 1
+      "number": 2
     }
   },
   "input": {
@@ -22,5 +22,8 @@
             "repo": "general_restore_input",
             "glob": "/*"
         }
+    },
+    "egress": {
+	    "URL": "gs://abuela_output_images_dev/"
     }
 }
