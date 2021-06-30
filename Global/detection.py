@@ -103,7 +103,7 @@ def main(config):
     print("directory of testing image: " + config.test_path)
     imagelist = os.listdir(config.test_path)
     imagelist.sort()
-    total_iter = 0 
+    total_iter = 0
 
     P_matrix = {}
     save_url = os.path.join(config.output_dir)
@@ -147,7 +147,7 @@ def main(config):
         with torch.no_grad():
             P = torch.sigmoid(model(scratch_image_scale))
 
-        P = P.data.cpu( )
+        P = P.data.cpu()
         P = F.interpolate(P, [ow, oh], mode="nearest")
 
         tv.utils.save_image(
