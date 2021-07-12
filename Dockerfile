@@ -1,7 +1,6 @@
 #FROM nvidia/cuda:11.1-base-ubuntu20.04
 FROM nvidia/cuda:11.4.0-base-ubuntu20.04
 
-
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt install git bzip2 wget unzip python3-pip python3-dev cmake libgl1-mesa-dev python-is-python3 libgtk2.0-dev -yq
 ADD . /app
 WORKDIR /app
@@ -41,3 +40,5 @@ RUN git clone https://github.com/NVlabs/SPADE.git
 RUN cd SPADE/ && pip3 install -r requirements.txt
 
 RUN cd ..
+
+CMD ["python3", "run.py"]

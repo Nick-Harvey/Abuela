@@ -14,7 +14,7 @@ import torchvision.utils as vutils
 import torchvision.transforms as transforms
 import torchvision.transforms as transforms
 import numpy as np
-
+import cv2
 
 def data_transforms(img, method=Image.BILINEAR, scale=False):
 
@@ -86,6 +86,11 @@ def parameter_set(opt):
         opt.name = "mapping_scratch"
         opt.load_pretrainA = os.path.join(opt.checkpoints_dir, "VAE_A_quality")
         opt.load_pretrainB = os.path.join(opt.checkpoints_dir, "VAE_B_scratch")
+        if opt.HR:
+            opt.mapping_exp = 1
+            opt.inference_optimize = True
+            opt.mask_dilation = 3
+            opt.name = "mapping_Patch_Attention"
 
 
 if __name__ == "__main__":
@@ -135,6 +140,11 @@ if __name__ == "__main__":
         if opt.NL_use_mask:
             mask_name = mask_loader[i]
             mask = Image.open(os.path.join(opt.test_mask, mask_name)).convert("RGB")
+            if opt.mask_dilation!=0:
+                kernel=np.ones((3,3),np.uint8)
+                mask=np.array(mask)
+                mask=cv2.dilate(mask,kernel,iterations=opt.mask_dilation)
+                mask=Image.fromarray(mask.astype('uint8'))
             origin = input
             input = irregular_hole_synthesize(input, mask)
             mask = mask_transform(mask)
@@ -156,7 +166,8 @@ if __name__ == "__main__":
         ### Necessary input
 
         try:
-            generated = model.inference(input, mask)
+            with torch.no_grad():
+                generated = model.inference(input, mask)
         except Exception as ex:
             print("Skip %s due to an error:\n%s" % (input_name, str(ex)))
             continue
