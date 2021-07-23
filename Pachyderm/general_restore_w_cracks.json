@@ -7,7 +7,7 @@
     "cmd": [
       "python", "run.py", "--input_folder", "/pfs/general_restore_w_cracks_input/", "--output_folder", "/pfs/out", "--GPU", "1", "--with_scratch" 
     ],
-    "image": "nickharvey/abuela-backend:dev-v1"
+    "image": "nickharvey/abuela-backend:HR-local-v2"
   },
   "standby": false,
   "resource_limits": {
