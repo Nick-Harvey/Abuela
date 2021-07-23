@@ -24,6 +24,6 @@
         }
     },
     "egress": {
-      "URL": "gs://abuela_output_images_dev/"
+      "URL": "gs://restored_images/"
     }
 }
