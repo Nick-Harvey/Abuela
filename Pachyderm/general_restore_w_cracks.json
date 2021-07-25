@@ -9,7 +9,7 @@
     ],
     "image": "nickharvey/abuela-backend:HR-local-v2"
   },
-  "standby": false,
+  "standby": true,
   "resource_limits": {
     "memory": "4G",
     "gpu": {
