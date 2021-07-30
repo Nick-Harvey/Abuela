@@ -14,7 +14,7 @@
     "memory": "4G",
     "gpu": {
       "type": "nvidia.com/gpu",
-      "number": 2
+      "number": 1
     }
   },
   "input": {
