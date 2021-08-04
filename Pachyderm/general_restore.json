@@ -24,6 +24,6 @@
         }
     },
     "egress": {
-	    "URL": "gs://restored_images/"
+	    "URL": "gs://restored_images_output/"
     }
 }
